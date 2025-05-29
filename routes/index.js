@@ -1,19 +1,10 @@
-var express = require("express");
-var assert = require("assert");
+var express = require('express');
 var router = express.Router();
-var restify = require("restify-clients");
-
-var client = restify.createJsonClient({
-  url: "http://localhost:4000/",
-});
 
 /* GET home page. */
-router.get("/", function(req, res, next) {
-  client.get("/users", function (err, request, response, obj) {
-    assert.ifError(err);
-
-    res.end(JSON.stringify(obj, null, 2));
-  });
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
 });
 
 module.exports = router;
+    
