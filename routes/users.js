@@ -12,32 +12,37 @@ router.get("/", function(req, res, next) {
   client.get("/users", function (err, request, response, obj) {
     assert.ifError(err);
 
-    res.end(obj);
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify(obj));
   });
 });
 
 router.put("/:id", function(req, res, next) {
-  client.put(`/users/${req.params.id}`, function (err, request, response, obj) {
+  client.put(`/users/${req.params.id}`, req.body, function (err, request, response, obj) {
     assert.ifError(err);
 
-    res.end(obj);
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify(obj));
   });
 }); 
 
 router.delete("/:id", function(req, res, next) {
-  client.delete(`/users/${req.params.id}`, function (err, request, response, obj) {
+  client.del(`/users/${req.params.id}`, function (err, request, response, obj) {
     assert.ifError(err);
 
-    res.end(obj);
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify(obj));
   });
 }); 
 
-router.post("/:id", function(req, res, next) {
+router.post("/", function(req, res, next) {
   client.post(`/users`, req.body, function (err, request, response, obj) {
     assert.ifError(err);
 
-    res.end(obj);
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify(obj));
   });
 }); 
 
 module.exports = router;
+  
